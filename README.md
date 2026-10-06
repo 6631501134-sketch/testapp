@@ -1,11 +1,3 @@
-# Cisco commands through Kafka
-
-Run this example on the same Ubuntu machine as your existing Kafka Docker container.
-Python 3.10+ is required. Leave your existing Kafka/Kafka UI running.
-
-Backend (FastAPI) -> router-commands topic -> worker -> Paramiko SSH -> Cisco router.
-The backend creates the topic once and publishes a message for each request.
-The worker prints results to its terminal. No result API or results topic is included.
 
 ## Install
 
@@ -20,17 +12,6 @@ python -m pip install -r requirements.txt
 cp .env.example .env
 nano .env
 ```
-
-Set ROUTER_HOST, ROUTER_USERNAME and ROUTER_PASSWORD to YOUR router's values.
-The example IP is a placeholder. The router must be reachable from Ubuntu and
-have SSH enabled, a local account, and permission to run the two show commands.
-Do not put your real .env in GitHub. Credentials stay in the worker environment;
-they are not sent through Kafka.
-
-Paramiko 3.x is selected for older classroom Cisco images. Do not downgrade further
-or change SSH algorithms blindly. If you get a key-exchange error, collect the
-exact exception and router `show ip ssh` output for troubleshooting.
-Paramiko does not automatically apply your OpenSSH ~/.ssh/config settings.
 
 ## Test SSH first
 
